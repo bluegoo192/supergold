@@ -19,6 +19,7 @@ for (var i=0; i<headers.length; i++) {
 
 for (var i=0; i<spans.length; i++) {
   console.log(spans[i].innerText);
+  spans[i].innerHTML += "  HELLO WORLD";
 }
 
 // +" length: " + headers.length + " " + document.readyState);
