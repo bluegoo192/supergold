@@ -22,4 +22,20 @@ for (var i=0; i<spans.length; i++) {
   spans[i].innerHTML += "  HELLO WORLD";
 }
 
+var hercules = new XMLHttpRequest();
+
+hercules.onreadystatechange = function () {
+  if (hercules.readyState == XMLHttpRequest.DONE ) {
+    if (hercules.status == 200) {
+      console.log(hercules.responseText);
+    } else if (hercules.status == 400) {
+      console.log('ERROR 420!!!');
+    } else {
+      console.log('Unknown response');
+    }
+  }
+};
+
+hercules.open("GET", "https://localhost:3000/", true);
+hercules.send();
 // +" length: " + headers.length + " " + document.readyState);
