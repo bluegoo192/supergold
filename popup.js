@@ -92,10 +92,18 @@ function renderStatus(statusText) {
   document.getElementById('status').textContent = statusText;
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
+  var headers = document.getElementById("content");
+  console.log(JSON.stringify(headers));
+}, false);
+
+
+
+/*document.addEventListener('DOMContentLoaded', function() {
+  console.log('hi2');
   getCurrentTabUrl(function(url) {
     // Put the image URL in Google search.
-    renderStatus('Performing Google Image search for ' + url);
+    renderStatus('NOTPerforming Google Image search for ' + url);
 
     getImageUrl(url, function(imageUrl, width, height) {
 
@@ -114,5 +122,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }, function(errorMessage) {
       renderStatus('Cannot display image. ' + errorMessage);
     });
+    console.log('hi');
   });
-});
+});*/
