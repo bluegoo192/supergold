@@ -18,6 +18,7 @@ router.get('/refreshGEARtxt', function(req, res, next) {
     fs.writeFile("./data/gear-2016-17.txt", pdfParser.getRawTextContent());
   });
   pdfParser.loadPDF("./data/gear-2016-17.pdf");
+  res.send("Finished updating pdf text data\n");
 });
 
 module.exports = router;
