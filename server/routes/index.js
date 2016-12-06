@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
+var mongoose = require('mongoose');
 
 function parsePDF(filename) {
+  mongoose.connect('mongodb://sgserver:squidserver@ds119788.mlab.com:19788/supergold')
   var fs = require('fs'),
     PDFParser = require("pdf2json");
   var pdfParser = new PDFParser(this, 1);
