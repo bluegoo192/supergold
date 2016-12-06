@@ -2,6 +2,11 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 
+var classSchema = mongoose.Schema({
+  name: String,
+  areas: [String]
+});
+
 function parsePDF(filename) {
   mongoose.connect('mongodb://sgserver:squidserver@ds119788.mlab.com:19788/supergold')
   var fs = require('fs'),
