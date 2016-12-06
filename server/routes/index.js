@@ -17,6 +17,13 @@ function parsePDF(filename) {
     fs.writeFile("./data/"+filename+".txt", pdfParser.getRawTextContent());
   });
   pdfParser.loadPDF("./data/"+filename+".pdf");
+
+  //parse text into array
+  var fs = require('fs');
+  fs.readFile("./data/"+filename+".txt", function(err, f) {
+    var lineArray = f.toString().split('\n');
+    console.log(lineArray);
+  });
 }
 
 
