@@ -23,6 +23,14 @@ function parsePDF(filename) {
   fs.readFile("./data/"+filename+".txt", function(err, f) {
     var lineArray = f.toString().split('\n');
     console.log(lineArray);
+    //the text parsing is bad, so searching for classes is not easy
+    var classRegex = /[\s\W][\s\W]([A-Z][a-z]+\s\s?\s?)+\d+\S*/g;
+    var classArray = [];
+    for (int i=0; i<lineArray.length; i++) {
+
+    }
+    //class name regex: [\s\W][\s\W]([A-Z][a-z]+\s\s?\s?)+\d+\S*
+
   });
 }
 
