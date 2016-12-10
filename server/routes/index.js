@@ -33,9 +33,9 @@ function parsePDF(filename) {
       if (areaRegex.test(lineArray[i])) {
         latestArea = areaLetterRegex.exec(lineArray[i])[0];
       }// if we detect mention of an area, store it
-      if (classRegex.exec(lineArray[i])) {
-        console.log(classRegex.exec(lineArray[i]));
-
+      var classMatch = lineArray[i].match(classRegex);
+      if ( classMatch ) {
+        console.log(classMatch);
       }
     }
     //class name regex: [\s\W][\s\W]([A-Z][a-z]+\s\s?\s?)+\d+\S*
