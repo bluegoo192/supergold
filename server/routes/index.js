@@ -35,7 +35,7 @@ function parsePDF(filename) {
       }// if we detect mention of an area, store it
       var classMatch = lineArray[i].match(classRegex);
       if ( classMatch ) {
-        console.log(classMatch);
+        console.log(classMatch+" -- AREA "+ latestArea);
       }
     }
     //class name regex: [\s\W][\s\W]([A-Z][a-z]+\s\s?\s?)+\d+\S*
