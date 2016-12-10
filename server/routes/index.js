@@ -9,6 +9,7 @@ var classSchema = mongoose.Schema({
 
 function parsePDF(filename) {
   mongoose.connect('mongodb://sgserver:squidserver@ds119788.mlab.com:19788/supergold')
+  var GEClass = mongoose.model('GEClass', classSchema);
   var fs = require('fs'),
     PDFParser = require("pdf2json");
   var pdfParser = new PDFParser(this, 1);
