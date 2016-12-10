@@ -26,11 +26,16 @@ function parsePDF(filename) {
     //the text parsing is bad, so searching for classes is not easy
     var classRegex = /[\s\W][\s\W]([A-Z][a-z]+\s\s?\s?)+\d+\S*/g;
     var areaRegex = /[eE][aA]\s[A-Z]:/;
+    var areaLetterRegex = /[A-Z](?=:)/;
     var classArray = [];
     var latestArea= "";
     for (var i=0; i<lineArray.length; i++) {
       if (areaRegex.test(lineArray[i])) {
-        console.log(areaRegex.exec(lineArray[i])[0]);
+        latestArea = areaLetterRegex.exec(lineArray[i])[0];
+      }// if we detect mention of an area, store it
+      if (classRegex.exec(lineArray[i])) {
+        console.log(classRegex.exec(lineArray[i]));
+
       }
     }
     //class name regex: [\s\W][\s\W]([A-Z][a-z]+\s\s?\s?)+\d+\S*
