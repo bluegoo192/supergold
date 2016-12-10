@@ -21,15 +21,20 @@ function parsePDF(filename) {
   //parse text into array
   var fs = require('fs');
   fs.readFile("./data/"+filename+".txt", function(err, f) {
-    var lineArray = f.toString().split('\n');
-    console.log(lineArray);
+    var lineBreakRegex = /[\n\r]/;
+    var lineArray = f.toString().split('\n');//may want to switch line break regex
     //the text parsing is bad, so searching for classes is not easy
     var classRegex = /[\s\W][\s\W]([A-Z][a-z]+\s\s?\s?)+\d+\S*/g;
+    var areaRegex = /[eE][aA]\s[A-Z]:/;
     var classArray = [];
-    for (int i=0; i<lineArray.length; i++) {
-
+    var latestArea= "";
+    for (var i=0; i<lineArray.length; i++) {
+      if (areaRegex.test(lineArray[i])) {
+        console.log(areaRegex.exec(lineArray[i])[0]);
+      }
     }
     //class name regex: [\s\W][\s\W]([A-Z][a-z]+\s\s?\s?)+\d+\S*
+    //area regex: [aA]\s[A-Z]:
 
   });
 }
