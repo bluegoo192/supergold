@@ -40,6 +40,7 @@ function parsePDF(filename) {
     for (var i=0; i<lineArray.length; i++) {
       if (areaRegex.test(lineArray[i])) {
         latestArea = areaLetterRegex.exec(lineArray[i])[0];
+        console.log("---- NEW AREA: "+latestArea+", line "+i+" ----")
       }// if we detect mention of an area, store it
       var classMatch = lineArray[i].match(classRegex);
       if ( classMatch ) {
@@ -47,10 +48,12 @@ function parsePDF(filename) {
         GEClass.findOneAndUpdate(
           { name: classMatch },
           { $addToSet: { areas: latestArea } },
-          { upsert: true },
+          { upsert: true, new: true },
           function (err, thisclass) {
             if (err) throw err;
-            thisclass.log();
+            if (thisclass.areas.length > 1) {
+              thisclass.log();
+            }
           }
         );
       }
