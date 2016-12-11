@@ -13,6 +13,9 @@ classSchema.methods.addArea = function(area) {
 classSchema.methods.log = function () {
   console.log(this.name + ", Areas " + this.areas);
 }
+classScheme.methods.smartSave = function () {
+
+}
 
 function parsePDF(filename) {
   mongoose.connect('mongodb://sgserver:squidserver@ds119788.mlab.com:19788/supergold')
@@ -43,11 +46,24 @@ function parsePDF(filename) {
       }// if we detect mention of an area, store it
       var classMatch = lineArray[i].match(classRegex);
       if ( classMatch ) {
-        console.log(classMatch+" -- AREA "+ latestArea);
-        var currentClass = new GEClass({name: classMatch, areas: [latestArea] });
-        currentClass.save(function (err, cc) {
-          if (err) return console.error(err);
-          cc.log();
+        //console.log(classMatch+" -- AREA "+ latestArea);
+        GEClass.findOne({ 'name': classMatch}, 'areas', function(err, thisclass) {
+          if (err) return function () {
+            console.log("ERROR FINDING CLASS!!!!");
+          };
+          if (thisclass) {
+            thisclass.addArea(latestArea);
+            thisClass.save(function (err, cc) {
+              if (err) return console.error(err);
+              cc.log();
+            });
+          } else {
+            var currentClass = new GEClass({name: classMatch, areas: [latestArea] });
+            currentClass.save(function (err, cc) {
+              if (err) return console.error(err);
+              cc.log();
+            });
+          }
         });
       }
     }
