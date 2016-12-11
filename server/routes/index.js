@@ -13,7 +13,7 @@ classSchema.methods.addArea = function(area) {
 classSchema.methods.log = function () {
   console.log(this.name + ", Areas " + this.areas);
 }
-classScheme.methods.smartSave = function () {
+classSchema.methods.smartSave = function () {
 
 }
 
