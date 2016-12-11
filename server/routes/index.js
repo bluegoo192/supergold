@@ -52,6 +52,7 @@ function parsePDF(filename) {
             console.log("ERROR FINDING CLASS!!!!");
           };
           if (thisclass) {
+            console.log("found existing class");
             thisclass.addArea(latestArea);
             thisClass.save(function (err, cc) {
               if (err) return console.error(err);
