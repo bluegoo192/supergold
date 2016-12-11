@@ -7,6 +7,10 @@ var classSchema = mongoose.Schema({
   areas: [String]
 });
 
+classSchema.methods.addArea = function(area) {
+  this.areas.add(area);
+}
+
 function parsePDF(filename) {
   mongoose.connect('mongodb://sgserver:squidserver@ds119788.mlab.com:19788/supergold')
   var GEClass = mongoose.model('GEClass', classSchema);
