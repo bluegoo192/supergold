@@ -10,6 +10,9 @@ var classSchema = mongoose.Schema({
 classSchema.methods.addArea = function(area) {
   this.areas.add(area);
 }
+classSchema.methods.log = function () {
+  console.log(this.name + ", Areas " + this.areas);
+}
 
 function parsePDF(filename) {
   mongoose.connect('mongodb://sgserver:squidserver@ds119788.mlab.com:19788/supergold')
@@ -41,6 +44,11 @@ function parsePDF(filename) {
       var classMatch = lineArray[i].match(classRegex);
       if ( classMatch ) {
         console.log(classMatch+" -- AREA "+ latestArea);
+        var currentClass = new GEClass({name: classMatch, areas: [latestArea] });
+        currentClass.save(function (err, cc) {
+          if (err) return console.error(err);
+          cc.log();
+        });
       }
     }
     //class name regex: [\s\W][\s\W]([A-Z][a-z]+\s\s?\s?)+\d+\S*
