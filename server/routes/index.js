@@ -13,9 +13,6 @@ classSchema.methods.addArea = function(area) {
 classSchema.methods.log = function () {
   console.log(this.name + ", Areas " + this.areas);
 }
-classSchema.methods.smartSave = function () {
-
-}
 
 function parsePDF(filename) {
   mongoose.connect('mongodb://sgserver:squidserver@ds119788.mlab.com:19788/supergold')
@@ -47,25 +44,15 @@ function parsePDF(filename) {
       var classMatch = lineArray[i].match(classRegex);
       if ( classMatch ) {
         //console.log(classMatch+" -- AREA "+ latestArea);
-        GEClass.findOne({ 'name': classMatch}, 'areas', function(err, thisclass) {
-          if (err) return function () {
-            console.log("ERROR FINDING CLASS!!!!");
-          };
-          if (thisclass) {
-            console.log("found existing class");
-            thisclass.addArea(latestArea);
-            thisClass.save(function (err, cc) {
-              if (err) return console.error(err);
-              cc.log();
-            });
-          } else {
-            var currentClass = new GEClass({name: classMatch, areas: [latestArea] });
-            currentClass.save(function (err, cc) {
-              if (err) return console.error(err);
-              cc.log();
-            });
+        GEClass.findOneAndUpdate(
+          { name: classMatch },
+          { $addToSet: { areas: latestArea } },
+          { upsert: true },
+          function (err, thisclass) {
+            if (err) throw err;
+            thisclass.log();
           }
-        });
+        );
       }
     }
     //class name regex: [\s\W][\s\W]([A-Z][a-z]+\s\s?\s?)+\d+\S*
